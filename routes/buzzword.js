@@ -9,15 +9,13 @@ const buzzWords = [];
 
 // Using ':' will denote that the uri is dynamic and then can be used within each handler method
 router.route('/')
-  .get(function(req, res){
-    res.send("Success!");
-  })
-
   .post(function(req, res) {
     const body = req.body;
     const word = req.body.buzzWord;
 
     // Check to see if that word already exists in memory
+      // If already exists return
+      // res.json({ "success": false});
 
     // Initiates an instance and count for that
       buzzWords.push({word: 1});
@@ -26,8 +24,12 @@ router.route('/')
 
   .put(function(req, res) {
     // Check to see if that word already exists in memory
-    // if true, add to count, return buzzWords array
-    // if false, return message that buzz word doesn't exist
+      // if true
+      // res.json({ "success": false});
+
+      // if false
+      // add 1 to newScore
+      // save score and put value into returning json newScore
     res.json({ "success": true, newScore: null});
   })
 
