@@ -2,21 +2,50 @@
 
 const express = require('express');
 const router = express.Router();
+require('../server.js');
+
+const buzzWords = [];
+
 
 // Using ':' will denote that the uri is dynamic and then can be used within each handler method
-router.route('/buzzword')
+router.route('/')
+  .get(function(req, res){
+    res.send("Success!");
+  })
+
   .post(function(req, res) {
-    console.log(req.body);
-    res.send(`You've added a new buzzword`);
+    const body = req.body;
+    const word = req.body.buzzWord;
+
+    // Check to see if that word already exists in memory
+
+    // Initiates an instance and count for that
+      buzzWords.push({word: 1});
+      res.json({ "success": true});
+  })
+
+  .put(function(req, res) {
+    // Check to see if that word already exists in memory
+    // if true, add to count, return buzzWords array
+    // if false, return message that buzz word doesn't exist
+    res.json({ "success": true, newScore: null});
+  })
+
+  .delete(function(req, res) {
+    console.log(buzzWords);
+    // use array method to splice the value...
+    console.log(buzzWords);
+    // res.send(`You've deleted buzzword`);
     res.json({ "success": true});
   });
-  // .put(function(req, res) {
-  //   res.send(`You've added a count to your buzzword`);
-  //   res.json({ "success": true, newScore: Number});
-  // })
-  // .delete(function(req, res) {
-  //   res.send(`You've deleted buzzword ${req.body}`);
-  //   res.json({ "success": true});
-  // });
 
 module.exports = router;
+
+// Helper functions
+function doesExist(word){
+  for(let i = 0; i < buzzWords.length; i++){
+    const isThere = buzzWords[i].hasOwnProperty(word);
+    console.log(isThere);
+  }
+
+};
